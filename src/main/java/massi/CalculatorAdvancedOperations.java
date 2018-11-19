@@ -11,6 +11,7 @@ public class CalculatorAdvancedOperations {
 	 * 
 	 * @param FirstNumber int
 	 * 
+	 * 
 	 * @param return double värde av resultat from sin(FirstNumber)
 	 */
 
