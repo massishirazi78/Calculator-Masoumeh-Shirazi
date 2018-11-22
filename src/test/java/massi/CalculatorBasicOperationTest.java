@@ -6,14 +6,14 @@ import org.junit.Test;
 
 import junit.framework.TestCase;
 
-public class CalculatorBasicOperationTest {
+public class CalculatorBasicOperationTest{
+
 	
-	CalculatorBasicOperations c = new CalculatorBasicOperations();
 
 	@Test
 	public void additionTest() {
-		TestCase.assertTrue(c.addition(4, 5) == 9);
-		TestCase.assertTrue(c.addition(3.5, 4.5) == 8.0);
+		TestCase.assertTrue(addition(4, 5) == 9);
+		TestCase.assertTrue(addition(3.5, 4.5) == 8.0);
 	}
 	
 }
