@@ -25,9 +25,9 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.SystemColor;
 
-public class ClaculatorJFrame extends JFrame {
+class ClaculatorJFrame extends JFrame
+		implements CalculatorAdvancedOperationsInterface, CalculatorBasicOperationsInterface {
 
-	
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -44,6 +44,21 @@ public class ClaculatorJFrame extends JFrame {
 	 * det är String för txtDisplay.
 	 */
 	private String st;
+	/**
+	 * det är char för operation.
+	 */
+
+	private char op;
+
+	/**
+	 * det är integer AdvOperation som vissar att vilken Opreation påverkar .
+	 * AdvOperation 1 är exp, AdvOperation 2 är sin, AdvOperation 3 är cos,
+	 * AdvOperation 4 är tan, AdvOperation 5 är cotan, AdvOperation 6 är log,
+	 * AdvOperation 7 är sqrt, AdvOperation 8 är pi, AdvOperation 9 är e,
+	 * 
+	 */
+
+	private int AdvOperation;
 
 	/**
 	 * det är integer operation som vissar att vilken Opreation påverkar .
@@ -51,7 +66,7 @@ public class ClaculatorJFrame extends JFrame {
 	 * 
 	 */
 
-	public int Operation;
+	private int Operation;
 	/**
 	 * double value för förata nummer.
 	 */
@@ -61,9 +76,9 @@ public class ClaculatorJFrame extends JFrame {
 	 */
 	public double SecondNumber = 0;
 	/**
-	 * double value för spara nummer tillfälligt
+	 * skann samma nummer som man trykar på knappen
 	 */
-	public double b = 0;
+	private int number;
 
 	/**
 	 * The main method of this application
@@ -76,12 +91,331 @@ public class ClaculatorJFrame extends JFrame {
 					ClaculatorJFrame frame = new ClaculatorJFrame();
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
-				
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+	}
+
+	/*
+	 * 
+	 * 
+	 * 
+	 */
+	public void skanntal(int number) {
+
+		st = txtDisplay1.getText();
+
+		switch (number) {
+		case (1):
+
+			if (st.length() == 0) {
+				txtDisplay1.setText("1");
+				txtDisplay2.setText("1");
+			} else {
+				txtDisplay2.setText(txtDisplay2.getText() + "1");
+				txtDisplay1.setText(txtDisplay1.getText() + "1");
+			}
+			break;
+		case (2):
+
+			if (st.length() == 0) {
+				txtDisplay1.setText("2");
+				txtDisplay2.setText("2");
+			} else {
+				txtDisplay2.setText(txtDisplay2.getText() + "2");
+				txtDisplay1.setText(txtDisplay1.getText() + "2");
+			}
+			break;
+		case (3):
+
+			if (st.length() == 0) {
+				txtDisplay1.setText("3");
+				txtDisplay2.setText("3");
+			} else {
+				txtDisplay2.setText(txtDisplay2.getText() + "3");
+				txtDisplay1.setText(txtDisplay1.getText() + "3");
+			}
+			break;
+		case (4):
+
+			if (st.length() == 0) {
+				txtDisplay1.setText("4");
+				txtDisplay2.setText("4");
+			} else {
+				txtDisplay2.setText(txtDisplay2.getText() + "4");
+				txtDisplay1.setText(txtDisplay1.getText() + "4");
+			}
+			break;
+		case (5):
+
+			if (st.length() == 0) {
+				txtDisplay1.setText("5");
+				txtDisplay2.setText("5");
+			} else {
+				txtDisplay2.setText(txtDisplay2.getText() + "5");
+				txtDisplay1.setText(txtDisplay1.getText() + "5");
+			}
+			break;
+		case (6):
+
+			if (st.length() == 0) {
+				txtDisplay1.setText("6");
+				txtDisplay2.setText("6");
+			} else {
+				txtDisplay2.setText(txtDisplay2.getText() + "6");
+				txtDisplay1.setText(txtDisplay1.getText() + "6");
+			}
+			break;
+		case (7):
+
+			if (st.length() == 0) {
+				txtDisplay1.setText("7");
+				txtDisplay2.setText("7");
+			} else {
+				txtDisplay2.setText(txtDisplay2.getText() + "7");
+				txtDisplay1.setText(txtDisplay1.getText() + "7");
+			}
+			break;
+		case (8):
+
+			if (st.length() == 0) {
+				txtDisplay1.setText("8");
+				txtDisplay2.setText("8");
+			} else {
+				txtDisplay2.setText(txtDisplay2.getText() + "8");
+				txtDisplay1.setText(txtDisplay1.getText() + "8");
+			}
+			break;
+		case (9):
+
+			if (st.length() == 0) {
+				txtDisplay1.setText("9");
+				txtDisplay2.setText("9");
+			} else {
+				txtDisplay2.setText(txtDisplay2.getText() + "9");
+				txtDisplay1.setText(txtDisplay1.getText() + "9");
+			}
+			break;
+		case (0):
+
+			if (st.length() == 0) {
+				txtDisplay1.setText("0");
+				txtDisplay2.setText("0");
+			} else {
+				txtDisplay2.setText(txtDisplay2.getText() + "0");
+				txtDisplay1.setText(txtDisplay1.getText() + "");
+			}
+			break;
+		default :
+			txtDisplay1.setText("");
+			txtDisplay2.setText("");
+			
+			
+		}
+
+	}
+
+	/*
+	 * 
+	 * 
+	 * Den metod tar int AdvOperation och använda ett switch case föratt välja
+	 * rätt AdvancedOperation sedan i varje statment , den tar value av double
+	 * FirstNumber från txtDisplay1 och anroppa metoden från class interface
+	 * class AdvancedOprationInterface
+	 *
+	 * @param AdvOperation integar
+	 * 
+	 * 
+	 * 
+	 */
+
+	public void AdvancedOperation(int AdvOperation) {
+
+		st = txtDisplay2.getText();
+		if (st.length() == 0) {
+			txtDisplay1.setText("");
+			txtDisplay2.setText("");
+		}else {
+				
+		FirstNumber = Double.parseDouble(st);
+	
+		switch (AdvOperation) {
+		case (1):
+			
+			txtDisplay2.setText("" + EXP(FirstNumber));
+			txtDisplay1.setText("exp(" + FirstNumber + ")");
+			break;
+		case (2):
+
+			
+			txtDisplay2.setText("" + sin(FirstNumber));
+			txtDisplay1.setText("sin (" + FirstNumber + ")");
+
+			break;
+		case (3):
+
+			
+			txtDisplay2.setText("" + cos(FirstNumber));
+			txtDisplay1.setText("cos ( " + FirstNumber + " )");
+
+			break;
+		case (4):
+	
+			txtDisplay2.setText("" + tan(FirstNumber));
+			txtDisplay1.setText("tan (" + FirstNumber + ")");
+
+			break;
+		case (5):
+		
+			
+				txtDisplay2.setText("" + xx(FirstNumber));
+				txtDisplay1.setText("" +FirstNumber + " ^2");
+			
+
+			break;
+		case (6):
+		
+			txtDisplay2.setText("" + LOG(FirstNumber));
+			txtDisplay1.setText("log (" + FirstNumber + ")");
+			break;
+		case (7):
+
+		
+			txtDisplay2.setText("" + sqr(FirstNumber));
+			txtDisplay1.setText("sqr ( " + FirstNumber + " )");
+
+			break;
+		case (8):
+
+			
+			txtDisplay2.setText("" + PI(FirstNumber));
+			txtDisplay1.setText("PI * " + FirstNumber);
+			break;
+		case (9):
+
+	
+			txtDisplay2.setText("" + E(FirstNumber));
+			txtDisplay1.setText("e * " + FirstNumber);
+
+			break;
+		default :
+			txtDisplay1.setText("");
+			txtDisplay2.setText("");
+			
+		}
+		}
+		FirstNumber=0;
+
+	}
+	/*
+	 * 
+	 * Den metod tar char op och använda ett switch case föratt välja rätt
+	 * BasicOperation sedan i varje statment , den tar value av double
+	 * FirstNumber från txtDisplay1 och lägga till operation sedan det skannar i
+	 * txtDisplay1.
+	 *
+	 * @param op character
+	 * 
+	 * @param Operation Integer value.
+	 * 
+	 * @param FirstNumber : First Number value double.
+	 * 
+	 * 
+	 * 
+	 */
+
+	public void BasicOperation(char op) {
+
+		String st1 = txtDisplay1.getText();
+		if (st1.length() == 0) {
+			txtDisplay1.setText("");
+			txtDisplay2.setText("");
+		}
+		
+		st = txtDisplay2.getText();
+	
+
+		switch (op) {
+		case '+':
+			if (FirstNumber == 0) {
+				FirstNumber = Double.parseDouble(st);	
+				
+				txtDisplay1.setText(FirstNumber + " + ");
+				Operation = 1; // plus
+				txtDisplay2.setText("");
+
+			} else {
+				txtDisplay1.setText(FirstNumber + " + ");
+				Operation = 1; // plus
+				txtDisplay2.setText("");
+			}
+
+			break;
+		case '-':
+			if (FirstNumber == 0) {
+				FirstNumber = Double.parseDouble(st);
+				txtDisplay1.setText(FirstNumber + " - ");
+				Operation = 2; // minus
+				txtDisplay2.setText("");
+
+			} else {
+				txtDisplay1.setText(FirstNumber + " - ");
+				Operation = 2; // minus
+				txtDisplay2.setText("");
+			}
+
+			break;
+		case '*':
+			if (FirstNumber == 0) {
+				FirstNumber = Double.parseDouble(st);
+				txtDisplay1.setText(FirstNumber + " * ");
+				Operation = 3; // Multiply
+				txtDisplay2.setText("");
+
+			} else {
+				txtDisplay1.setText(FirstNumber + " * ");
+				Operation = 3; // Multiply
+				txtDisplay2.setText("");
+			}
+
+			break;
+		case '/':
+			if (FirstNumber == 0) {
+				FirstNumber = Double.parseDouble(st);
+				txtDisplay1.setText(FirstNumber + " / ");
+				Operation = 4; // division
+				txtDisplay2.setText("");
+
+			} else {
+				txtDisplay1.setText(FirstNumber + " / ");
+				Operation = 4; // Division
+				txtDisplay2.setText("");
+			}
+
+			break;
+		case '%':
+
+			if (FirstNumber == 0) {
+				FirstNumber = Double.parseDouble(st);
+				txtDisplay1.setText(FirstNumber + " % ");
+				Operation = 5; // Modulus opretion
+				txtDisplay2.setText("");
+
+			} else {
+				txtDisplay1.setText(FirstNumber + " % ");
+				Operation = 5; // Modulus opretion
+				txtDisplay2.setText("");
+			}
+
+			break;
+		default :
+			txtDisplay2.setText("");
+			
+		}
+		
 	}
 
 	/**
@@ -106,22 +440,13 @@ public class ClaculatorJFrame extends JFrame {
 		btn0.setBounds(196, 350, 60, 45);
 		btn0.addActionListener(new ActionListener() {
 			/*
-			 * Den metod Skannar character "0" till txtDisplay1 och txtDisplay2.
+			 * Den metod anropa metod skanntal.
 			 * 
 			 * 
 			 */
 			public void actionPerformed(ActionEvent e) {
-			
-				st = txtDisplay2.getText();
-		
-				if (st.length() == 0) {
-			
-					txtDisplay2.setText("0");
 
-				} else {
-					txtDisplay2.setText(txtDisplay2.getText() + "0");
-					txtDisplay1.setText(txtDisplay1.getText() + "");
-				}
+				skanntal(0);
 			}
 		});
 
@@ -133,22 +458,12 @@ public class ClaculatorJFrame extends JFrame {
 		btn1.setBounds(196, 286, 60, 45);
 		btn1.addActionListener(new ActionListener() {
 			/*
-			 * Den metod Skannar character "1" till txtDisplay1 och txtDisplay2.
+			 * Den metod anropa metod skanntal.
 			 * 
 			 * 
 			 */
 			public void actionPerformed(ActionEvent e) {
-
-				st = txtDisplay1.getText();
-				
-				if (st.length() == 0 ) {
-					txtDisplay1.setText("1");
-					txtDisplay2.setText("1");
-
-				}else{
-					txtDisplay2.setText(txtDisplay2.getText() + "1");
-					txtDisplay1.setText(txtDisplay1.getText() + "1");
-				}
+				skanntal(1);
 			}
 		});
 
@@ -160,20 +475,12 @@ public class ClaculatorJFrame extends JFrame {
 		btn2.setBounds(273, 286, 60, 45);
 		btn2.addActionListener(new ActionListener() {
 			/*
-			 * Den metod Skannar character "2" till txtDisplay1 och txtDisplay2.
+			 * Den metod anropa metod skanntal.
 			 * 
 			 * 
 			 */
 			public void actionPerformed(ActionEvent e) {
-
-				st = txtDisplay1.getText();
-				if (st.length() == 0) {
-					txtDisplay1.setText("2");
-					txtDisplay2.setText("2");
-				} else {
-					txtDisplay2.setText(txtDisplay2.getText() + "2");
-					txtDisplay1.setText(txtDisplay1.getText() + "2");
-				}
+				skanntal(2);
 
 			}
 		});
@@ -186,20 +493,13 @@ public class ClaculatorJFrame extends JFrame {
 		btn3.setBounds(347, 285, 60, 45);
 		btn3.addActionListener(new ActionListener() {
 			/*
-			 * Den metod Skannar character "3" till txtDisplay1 och txtDisplay2.
+			 * Den metod anropa metod skanntal.
 			 * 
 			 * 
 			 */
 			public void actionPerformed(ActionEvent e) {
 
-				st = txtDisplay1.getText();
-				if (st.length() == 0) {
-					txtDisplay1.setText("3");
-					txtDisplay2.setText("3");
-				} else {
-					txtDisplay2.setText(txtDisplay2.getText() + "3");
-					txtDisplay1.setText(txtDisplay1.getText() + "3");
-				}
+				skanntal(3);
 
 			}
 		});
@@ -212,20 +512,13 @@ public class ClaculatorJFrame extends JFrame {
 		btn4.setBounds(196, 225, 60, 45);
 		btn4.addActionListener(new ActionListener() {
 			/*
-			 * Den metod Skannar character "4" till txtDisplay1 och txtDisplay2.
+			 * Den metod anropa metod skanntal.
 			 * 
 			 * 
 			 */
 			public void actionPerformed(ActionEvent e) {
 
-				st = txtDisplay1.getText();
-				if (st.length() == 0) {
-					txtDisplay1.setText("4");
-					txtDisplay2.setText("4");
-				} else {
-					txtDisplay2.setText(txtDisplay2.getText() + "4");
-					txtDisplay1.setText(txtDisplay1.getText() + "4");
-				}
+				skanntal(4);
 			}
 
 		});
@@ -238,20 +531,12 @@ public class ClaculatorJFrame extends JFrame {
 		btn5.setBounds(273, 225, 60, 45);
 		btn5.addActionListener(new ActionListener() {
 			/*
-			 * Den metod Skannar character "5" till txtDisplay1 och txtDisplay2.
-			 * 
+			 * Den metod anropa metod skanntal.
 			 * 
 			 */
 			public void actionPerformed(ActionEvent e) {
 
-				st = txtDisplay1.getText();
-				if (st.length() == 0) {
-					txtDisplay1.setText("5");
-					txtDisplay2.setText("5");
-				} else {
-					txtDisplay2.setText(txtDisplay2.getText() + "5");
-					txtDisplay1.setText(txtDisplay1.getText() + "5");
-				}
+				skanntal(5);
 			}
 		});
 
@@ -263,20 +548,13 @@ public class ClaculatorJFrame extends JFrame {
 		btn6.setBounds(347, 224, 60, 45);
 		btn6.addActionListener(new ActionListener() {
 			/*
-			 * Den metod Skannar character "6" till txtDisplay1 och txtDisplay2.
+			 * Den metod anropa metod skanntal.
 			 * 
 			 * 
 			 */
 			public void actionPerformed(ActionEvent e) {
 
-				st = txtDisplay1.getText();
-				if (st.length() == 0) {
-					txtDisplay1.setText("6");
-					txtDisplay2.setText("6");
-				} else {
-					txtDisplay2.setText(txtDisplay2.getText() + "6");
-					txtDisplay1.setText(txtDisplay1.getText() + "6");
-				}
+				skanntal(6);
 			}
 
 		});
@@ -289,20 +567,13 @@ public class ClaculatorJFrame extends JFrame {
 		btn7.setBounds(196, 168, 60, 45);
 		btn7.addActionListener(new ActionListener() {
 			/*
-			 * Den metod Skannar character "7" till txtDisplay1 och txtDisplay2.
+			 * Den metod anropa metod skanntal.
 			 * 
 			 * 
 			 */
 			public void actionPerformed(ActionEvent e) {
 
-				st = txtDisplay1.getText();
-				if (st.length() == 0) {
-					txtDisplay1.setText("7");
-					txtDisplay2.setText("7");
-				} else {
-					txtDisplay2.setText(txtDisplay2.getText() + "7");
-					txtDisplay1.setText(txtDisplay1.getText() + "7");
-				}
+				skanntal(7);
 			}
 		});
 
@@ -314,21 +585,14 @@ public class ClaculatorJFrame extends JFrame {
 		btn8.setBounds(273, 168, 60, 45);
 		btn8.addActionListener(new ActionListener() {
 			/*
-			 * Den metod Skannar character "8" till txtDisplay1 och txtDisplay2.
+			 * Den metod anropa metod skanntal.
 			 * 
 			 * 
 			 */
 
 			public void actionPerformed(ActionEvent e) {
 
-				st = txtDisplay1.getText();
-				if (st.length() == 0) {
-					txtDisplay1.setText("8");
-					txtDisplay2.setText("8");
-				} else {
-					txtDisplay2.setText(txtDisplay2.getText() + "8");
-					txtDisplay1.setText(txtDisplay1.getText() + "8");
-				}
+				skanntal(8);
 			}
 
 		});
@@ -341,21 +605,14 @@ public class ClaculatorJFrame extends JFrame {
 		btn9.setBounds(347, 168, 60, 45);
 		btn9.addActionListener(new ActionListener() {
 			/*
-			 * Den metod Skannar character "9" till txtDisplay1 och txtDisplay2.
+			 * Den metod anropa metod skanntal.
 			 * 
 			 * 
 			 */
 
 			public void actionPerformed(ActionEvent e) {
 
-				st = txtDisplay1.getText();
-				if (st.length() == 0) {
-					txtDisplay1.setText("9");
-					txtDisplay2.setText("9");
-				} else {
-					txtDisplay2.setText(txtDisplay2.getText() + "9");
-					txtDisplay1.setText(txtDisplay1.getText() + "9");
-				}
+				skanntal(9);
 			}
 		});
 
@@ -367,9 +624,9 @@ public class ClaculatorJFrame extends JFrame {
 		btnEquals.setBounds(273, 349, 134, 45);
 		btnEquals.addActionListener(new ActionListener() {
 			/*
-			 * Den metod Skappar 4 objekt plus , min , gånger och divi från
-			 * klass CalculatorBasicOperationsInterface och ett objekt rest från
-			 * klass CalculatorAdvancedOperationsI. Den kontrolerar vilken
+			 * Den metod anropa 4 metoder från interface class
+			 * CalculatorBasicOperationsInterface och ett metod från interface
+			 * class CalculatorAdvancedOperationsI. Den kontrolerar vilken
 			 * opreation påverkas . Operation 1 är plus , Operation 2 är minus,
 			 * Operation 3 är multiply, Operation 4 är division , Operation 5 är
 			 * Modulus. Den räknar resultaten och skannar i txtDisplay2.
@@ -393,12 +650,8 @@ public class ClaculatorJFrame extends JFrame {
 				}
 
 				else {
-
-					CalculatorBasicOperations plus = new CalculatorBasicOperations();
-					CalculatorBasicOperations min = new CalculatorBasicOperations();
-					CalculatorBasicOperations gånger = new CalculatorBasicOperations();
-					CalculatorBasicOperations divi = new CalculatorBasicOperations();
-					CalculatorAdvancedOperations rest = new CalculatorAdvancedOperations();
+					
+					
 
 					SecondNumber = Double.parseDouble(st);
 
@@ -411,45 +664,46 @@ public class ClaculatorJFrame extends JFrame {
 					switch (Operation) {
 					case 1:
 						txtDisplay1.setText(FirstNumber + " + " + SecondNumber);
-						txtDisplay2.setText("" + plus.addition(FirstNumber, SecondNumber));
+						txtDisplay2.setText("" + addition(FirstNumber, SecondNumber));
 						break;
 					case 2:
 						txtDisplay1.setText(FirstNumber + " - " + SecondNumber);
-						txtDisplay2.setText("" + min.subtraction(FirstNumber, SecondNumber));
+						txtDisplay2.setText("" + subtraction(FirstNumber, SecondNumber));
 
 						break;
 					case 3:
 						txtDisplay1.setText(FirstNumber + " * " + SecondNumber);
-						txtDisplay2.setText("" + gånger.multiplikation(FirstNumber, SecondNumber));
+						txtDisplay2.setText("" + multiplikation(FirstNumber, SecondNumber));
 
 						break;
 					case 4:
-						if (SecondNumber==0){
-							JOptionPane.showMessageDialog(null," You can not perform a division by zero");
+						if (SecondNumber == 0) {
+							JOptionPane.showMessageDialog(null, " You can not perform a division by zero");
 							txtDisplay1.setText("");
 							txtDisplay2.setText("");
-							
-						}else{	
-						txtDisplay1.setText(FirstNumber + " / " + SecondNumber);
-						txtDisplay2.setText("" + divi.dividera(FirstNumber, SecondNumber));}
+
+						} else {
+							txtDisplay1.setText(FirstNumber + " / " + SecondNumber);
+							txtDisplay2.setText("" + dividera(FirstNumber, SecondNumber));
+						}
 						break;
 					case 5:
-						if (SecondNumber==0){
-							JOptionPane.showMessageDialog(null," You can not perform a division by zero");
+						if (SecondNumber == 0) {
+							JOptionPane.showMessageDialog(null, " You can not perform a division by zero");
 							txtDisplay1.setText("");
 							txtDisplay2.setText("");
-						}else{	
-						txtDisplay1.setText(FirstNumber + " % " + SecondNumber);
-						txtDisplay2.setText("" + rest.modulus(FirstNumber, SecondNumber));}
+						} else {
+							txtDisplay1.setText(FirstNumber + " % " + SecondNumber);
+							txtDisplay2.setText("" + modulus(FirstNumber, SecondNumber));
+						}
 						break;
 
 					}
 				}
-				FirstNumber=0;
-				SecondNumber=0;
+				FirstNumber = 0;
+				SecondNumber = 0;
 			}
-			
-			
+
 		});
 
 		/**
@@ -461,13 +715,7 @@ public class ClaculatorJFrame extends JFrame {
 		btnPlus.addActionListener(new ActionListener() {
 			/*
 			 * 
-			 * Den metod tar value av double FirstNumber från txtDisplay1
-			 * och lägga till character "+" sedan det skannar i txtDisplay1.
-			 *
-			 * 
-			 * @param Operation Integer value. Det vissar att plus påverkas.
-			 * 
-			 * @param FirstNumber : First Number value double.
+			 * Den metod call metod BasicOperation()
 			 * 
 			 * 
 			 * 
@@ -475,23 +723,10 @@ public class ClaculatorJFrame extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 
-				st = txtDisplay1.getText();
-				if (st.length() == 0) {
-					txtDisplay1.setText("");
-					txtDisplay2.setText("");
-				}
-
-				else if (FirstNumber==0){
-					   st = txtDisplay2.getText();
-					   FirstNumber = Double.parseDouble(st);}
-                    else{
-					   txtDisplay1.setText(FirstNumber + "+");
-					   Operation = 1; // plus
-					   txtDisplay2.setText("");}
-
-				
+				BasicOperation('+');
 
 			}
+
 		});
 
 		btnPlus.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -505,35 +740,15 @@ public class ClaculatorJFrame extends JFrame {
 		btnMinus.addActionListener(new ActionListener() {
 			/*
 			 * 
-			 * Den metod tar value av double FirstNumber från txtDisplay1
-			 * och lägga till character "-" sedan det skannar i txtDisplay1.
-			 *
-			 * 
-			 * @param Operation Integer value. Det vissar att minus påverkas.
-			 * 
-			 * @param FirstNumber : FirstNumber value double
+			 * Den metod anrop metod BasicOperation
 			 * 
 			 * 
 			 * 
 			 */
 			public void actionPerformed(ActionEvent e) {
+				BasicOperation('-');
+			}
 
-				st = txtDisplay1.getText();
-				if (st.length() == 0) {
-					txtDisplay2.setText("");
-					txtDisplay2.setText("");
-				}
-
-				else if (FirstNumber==0){
-					st = txtDisplay2.getText();
-					FirstNumber = Double.parseDouble(st);}
-				else{
-					txtDisplay1.setText(FirstNumber + "-");
-					Operation = 2;// minus
-					txtDisplay2.setText("");}
-				}
-
-			
 		});
 
 		/**
@@ -547,33 +762,13 @@ public class ClaculatorJFrame extends JFrame {
 		btnMultiply.addActionListener(new ActionListener() {
 			/*
 			 * 
-			 * Den metod tar value av double FirstNumber från txtDisplay1
-			 * och lägga till character "*" sedan det skannar i txtDisplay1.
-			 *
-			 * 
-			 * @param Operation Integer value. Det vissar att Multiply påverkas.
-			 * 
-			 * @param FirstNumber : FirstNumber value double
-			 * 
+			 * Den metod anrop metod BasicOperation
 			 * 
 			 * 
 			 */
 			public void actionPerformed(ActionEvent e) {
+				BasicOperation('*');
 
-				st = txtDisplay1.getText();
-				if (st.length() == 0) {
-					txtDisplay2.setText("");
-					txtDisplay2.setText("");
-				}
-				else if (FirstNumber==0){
-					st = txtDisplay2.getText();
-					FirstNumber = Double.parseDouble(st);}
-				else{
-					txtDisplay1.setText(FirstNumber + "*");
-					Operation = 3; // Multiply
-					txtDisplay2.setText("");
-				}
-				
 			}
 		});
 
@@ -586,32 +781,12 @@ public class ClaculatorJFrame extends JFrame {
 
 			/*
 			 * 
-			 * Den metod tar value av double FirstNumber från txtDisplay1
-			 * och lägga till character "/" sedan det skannar i txtDisplay1.
-			 *
 			 * 
-			 * @param Operation Integer value. Det vissar att division påverkas.
-			 * 
-			 * @param FirstNumber : FirstNumber value double
-			 * 
-			 * 
+			 * Den metod anrop metod BasicOperation
 			 * 
 			 */
 			public void actionPerformed(ActionEvent e) {
-
-				st = txtDisplay1.getText();
-				if (st.length() == 0) {
-					txtDisplay2.setText("");
-					txtDisplay2.setText("");
-				}
-				else if (FirstNumber==0){
-					st = txtDisplay2.getText();
-					FirstNumber = Double.parseDouble(st);}
-				else{
-					txtDisplay1.setText(FirstNumber + "/");
-					Operation = 4; // Division är operation nummer 4
-					txtDisplay2.setText("");
-				}
+				BasicOperation('/');
 
 			}
 		});
@@ -620,45 +795,21 @@ public class ClaculatorJFrame extends JFrame {
 		/**
 		 * Skapar Button Cotan.
 		 */
-		JButton btncotan = new JButton("cotan");
-		btncotan.setHorizontalTextPosition(SwingConstants.CENTER);
-		btncotan.setBounds(107, 350, 76, 42);
-		btncotan.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btncotan.addActionListener(new ActionListener() {
+		JButton btnxx = new JButton("X^2");
+		btnxx.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnxx.setBounds(107, 350, 76, 42);
+		btnxx.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnxx.addActionListener(new ActionListener() {
 
 			/*
 			 * 
-			 * Den metod tar value av double FirstNumber och räknar Cotan
-			 * av FirstNumber.
-			 * 
-			 * st är String.Det vissar att txtDisplay2. Om length av st var inte
-			 * 0 sedan räknar cotan (FirstNumber).
-			 * 
-			 * @param FirstNumber : FirstNumber value double
-			 * 
+			 * Den metod anropa metod AdvancedOperation
 			 * 
 			 * 
 			 */
 			public void actionPerformed(ActionEvent arg0) {
-				CalculatorAdvancedOperations Cotan = new CalculatorAdvancedOperations();
-				st = txtDisplay2.getText();
-				if (st.length() == 0) {
-					txtDisplay1.setText("");
-					txtDisplay2.setText("");
-				}
 
-				else {
-					FirstNumber = Double.parseDouble(st);
-					if (FirstNumber==0){
-						JOptionPane.showMessageDialog(null," You can not perform a cotan() by zero");
-						txtDisplay1.setText("");
-						txtDisplay2.setText("");
-					}else{
-					
-					txtDisplay2.setText("" + Cotan.cotan(FirstNumber));
-					txtDisplay1.setText("cotan (" + FirstNumber + ")");
-					}
-				}
+				AdvancedOperation(5);
 
 			}
 		});
@@ -674,32 +825,12 @@ public class ClaculatorJFrame extends JFrame {
 
 			/*
 			 * 
-			 * Den metod tar value av double FirstNumber och räknar
-			 * sinous av FirstNumber.
-			 * 
-			 * st är String.Det vissar att txtDisplay2. Om length av st var inte
-			 * 0 sedan räknar sin (FirstNumber).
-			 * 
-			 * @param FirstNumber : FirstNumber value double
-			 * 
+			 * Den metod anropa metod AdvancedOperation
 			 * 
 			 * 
 			 */
 			public void actionPerformed(ActionEvent e) {
-				CalculatorAdvancedOperations SIN = new CalculatorAdvancedOperations();
-				st = txtDisplay2.getText();
-				if (st.length() == 0) {
-					txtDisplay1.setText("");
-					txtDisplay2.setText("");
-				}
-
-				else {
-					FirstNumber = Double.parseDouble(st);
-					txtDisplay2.setText("" + SIN.sin(FirstNumber));
-					txtDisplay1.setText("sin (" + FirstNumber + ")");
-					// newFun = true;}
-
-				}
+				AdvancedOperation(2);
 
 			}
 		});
@@ -713,30 +844,12 @@ public class ClaculatorJFrame extends JFrame {
 		btnExp.setBounds(107, 115, 76, 42);
 		btnExp.addActionListener(new ActionListener() {
 			/*
-			 * 
-			 * Den metod tar value av double Fnum(first number) och räknar
-			 * exp(Fnum).
-			 * 
-			 * st är String.Det vissar att txtDisplay2. Om length av st var inte
-			 * 0 sedan räknar exp (Fnum). Det menar att exp returer Eulers
-			 * nummer e upphöjt till en double value.
-			 * 
-			 * @param Fnum : firstnumber value double
-			 * 
+			 * Den metod anropa metod AdvancedOperation
 			 * 
 			 * 
 			 */
 			public void actionPerformed(ActionEvent arg0) {
-				CalculatorAdvancedOperations x = new CalculatorAdvancedOperations();
-				st = txtDisplay2.getText();
-				if (st.length() == 0) {
-					txtDisplay1.setText("");
-					txtDisplay2.setText("");
-				} else {
-					FirstNumber = Double.parseDouble(st);
-					txtDisplay2.setText("" + x.EXP(FirstNumber));
-					txtDisplay1.setText("exp(" + FirstNumber + ")");
-				}
+				AdvancedOperation(1);
 
 			}
 		});
@@ -785,30 +898,14 @@ public class ClaculatorJFrame extends JFrame {
 		btnPi.addActionListener(new ActionListener() {
 			/*
 			 * 
-			 * Den metod tar value av double FirstNumber och
-			 * multiplikation i Pi. valu av PI är nästan 3,1416.
-			 * 
-			 * st String.Det vissar att txtDisplay2.Om length av st var inte 0
-			 * sedan räknar (PI * FirstNumber).
-			 * 
-			 * @param FirstNumber : FirstNumber value double.
-			 * 
-			 * 
+			 * Den metod anropa metod AdvancedOperation
 			 * 
 			 */
 
 			public void actionPerformed(ActionEvent e) {
-				CalculatorAdvancedOperations pi = new CalculatorAdvancedOperations();
-				st = txtDisplay2.getText();
-				if (st.length() == 0) {
-					txtDisplay1.setText("");
-					txtDisplay2.setText("");
-				} else {
-					FirstNumber = Double.parseDouble(st);
-					txtDisplay2.setText("" + pi.PI(FirstNumber));
-					txtDisplay1.setText("PI * " + FirstNumber);
-					// newFun = true;
-				}
+
+				AdvancedOperation(8);
+
 			}
 
 		});
@@ -822,30 +919,12 @@ public class ClaculatorJFrame extends JFrame {
 		btnSqr.addActionListener(new ActionListener() {
 			/*
 			 * 
-			 * Den metod tar value av double FirstNumber och räknar Sqrt
-			 * av FirstNumber.
-			 * 
-			 * st är String.Det vissar att txtDisplay2. Om length av st var inte
-			 * 0 sedan räknar Sqrt (FirstNumber).
-			 * 
-			 * @param FirstNumber : FirstNumber value double
-			 * 
+			 * Den metod anropa metod AdvancedOperation
 			 * 
 			 * 
 			 */
 			public void actionPerformed(ActionEvent e) {
-				CalculatorAdvancedOperations SQR = new CalculatorAdvancedOperations();
-				st = txtDisplay2.getText();
-				if (st.length() == 0) {
-					txtDisplay1.setText("");
-					txtDisplay2.setText("");
-				} else {
-
-					FirstNumber = Double.parseDouble(st);
-					txtDisplay2.setText("" + SQR.sqr(FirstNumber));
-					txtDisplay1.setText("sqr ( " + FirstNumber + " )");
-					// newFun = true;
-				}
+				AdvancedOperation(7);
 
 			}
 
@@ -863,29 +942,13 @@ public class ClaculatorJFrame extends JFrame {
 		btnCos.addActionListener(new ActionListener() {
 			/*
 			 * 
-			 * Den metod tar value av double FirstNumber och räknar
-			 * cosinus av FirstNumber.
-			 * 
-			 * st är String.Det vissar att txtDisplay2. Om length av st var inte
-			 * 0 sedan räknar Cos (FirstNumber).
-			 * 
-			 * @param FirstNumber : FirstNumber value double
-			 * 
+			 * Den metod anropa metod AdvancedOperation
 			 * 
 			 * 
 			 */
 			public void actionPerformed(ActionEvent e) {
-				CalculatorAdvancedOperations COS = new CalculatorAdvancedOperations();
-				st = txtDisplay2.getText();
-				if (st.length() == 0) {
-					txtDisplay1.setText("");
-					txtDisplay2.setText("");
-				} else {
-					FirstNumber = Double.parseDouble(st);
-					txtDisplay2.setText("" + COS.cos(FirstNumber));
-					txtDisplay1.setText("cos ( " + FirstNumber + " )");
+				AdvancedOperation(3);
 
-				}
 			}
 
 		});
@@ -900,31 +963,14 @@ public class ClaculatorJFrame extends JFrame {
 
 			/*
 			 * 
-			 * Den metod tar value av double FirstNumber från txtDisplay1
-			 * och lägga till character "%" sedan det skannar i txtDisplay1.
-			 *
-			 * 
-			 * @param Operation Integer value. Det vissar att Modulus påverkas.
-			 * 
-			 * @param FirstNumber : FirstNumber value double.
+			 * Den metod anrop BasicOperation
 			 * 
 			 * 
 			 * 
 			 */
 			public void actionPerformed(ActionEvent e) {
 
-				Operation = 5; // Modulus opretion
-				st = txtDisplay2.getText();
-				if (st.length() == 0) {
-					txtDisplay2.setText("");
-					txtDisplay2.setText("");
-				}
-
-				else {
-					FirstNumber = Double.parseDouble(st);
-					txtDisplay2.setText("");
-					txtDisplay1.setText(FirstNumber + " % ");
-				}
+				BasicOperation('%');
 
 			}
 		});
@@ -940,32 +986,15 @@ public class ClaculatorJFrame extends JFrame {
 		btnE.setBounds(22, 350, 70, 42);
 		btnE.addActionListener(new ActionListener() {
 			/*
-			 * 
-			 * Den metod tar value av double FirstNumber och
-			 * multiplikation i Euler (e * FirstNumber). valu av e är nästan 2,71828.
-			 * 
-			 * @param st String från txtDisplay2
-			 * 
-			 * @param FirstNumber : FirstNumber value double
-			 * 
+			 * Den metod anropa metod AdvancedOperation
 			 * 
 			 * 
 			 */
 
 			public void actionPerformed(ActionEvent e) {
-				CalculatorAdvancedOperations ee = new CalculatorAdvancedOperations();
-				st = txtDisplay2.getText();
-				if (st.length() == 0) {
-					txtDisplay2.setText("");
-					txtDisplay2.setText("");
-				}
 
-				else {
-					FirstNumber = Double.parseDouble(st);
-					txtDisplay2.setText("" + ee.E(FirstNumber));
-					txtDisplay1.setText("e * " + FirstNumber);
+				AdvancedOperation(9);
 
-				}
 			}
 		});
 
@@ -1019,31 +1048,14 @@ public class ClaculatorJFrame extends JFrame {
 		btnTan.addActionListener(new ActionListener() {
 
 			/*
-			 * Den metod tar value av double FirstNumber och räknar
-			 * tangent av FirstNumber.
-			 * 
-			 * @param st är String.Det vissar att txtDisplay2.Om length av st
-			 * var inte 0 sedan räknar tangent (FirstNumber).
-			 * 
-			 * @param FirstNumber : FirstNumber value double
-			 * 
+			 * Den metod anropa metod AdvancedOperation
 			 * 
 			 * 
 			 */
 			public void actionPerformed(ActionEvent e) {
-				CalculatorAdvancedOperations TAN = new CalculatorAdvancedOperations();
-				st = txtDisplay2.getText();
-				if (st.length() == 0) {
-					txtDisplay1.setText("");
-					txtDisplay2.setText("");
-				}
 
-				else {
-					FirstNumber = Double.parseDouble(st);
-					txtDisplay2.setText("" + TAN.tan(FirstNumber));
-					txtDisplay1.setText("tan (" + FirstNumber + ")");
-		
-				}
+				AdvancedOperation(4);
+
 			}
 		});
 		btnTan.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -1060,30 +1072,12 @@ public class ClaculatorJFrame extends JFrame {
 		btnLog.addActionListener(new ActionListener() {
 			/*
 			 * 
-			 * Den metod tar value av double FirstNumber och räknar
-			 * Logaritm av FirstNumber.
-			 * 
-			 * @param st är String. Det vissar att txtDisplay2. Om length av st
-			 * var inte 0 sedan räknar Logaritm (FirstNumber).
-			 * 
-			 * @param FirstNumber : FirstNumber value double
+			 * Den metod anropa metod AdvancedOperation
 			 * 
 			 */
 
 			public void actionPerformed(ActionEvent e) {
-
-				CalculatorAdvancedOperations Log = new CalculatorAdvancedOperations();
-				st = txtDisplay2.getText();
-				if (st.length() == 0) {
-					txtDisplay2.setText("");
-					txtDisplay2.setText("");
-				}
-
-				else {
-					FirstNumber = Double.parseDouble(st);
-					txtDisplay2.setText("" + Log.LOG(FirstNumber));
-					txtDisplay1.setText("log (" + FirstNumber + ")");
-					}
+				AdvancedOperation(6);
 
 			}
 		});
@@ -1099,16 +1093,15 @@ public class ClaculatorJFrame extends JFrame {
 			/**
 			 * 
 			 * Den metod rensa txtDisplay1 och txtDisplay2 . txtDisplay1=""
-			 * txtDisplay2=""
-			 * FirstNumber och SecondNumber blir zero.
+			 * txtDisplay2="" FirstNumber och SecondNumber blir zero.
 			 * 
 			 */
 
 			public void actionPerformed(ActionEvent e) {
 				txtDisplay1.setText(null);
 				txtDisplay2.setText(null);
-				FirstNumber=0;
-				SecondNumber=0;
+				FirstNumber = 0;
+				SecondNumber = 0;
 
 			}
 		});
@@ -1152,7 +1145,7 @@ public class ClaculatorJFrame extends JFrame {
 		contentPane.add(btnSin);
 		contentPane.add(btnTan);
 		contentPane.add(btnCos);
-		contentPane.add(btncotan);
+		contentPane.add(btnxx);
 
 		contentPane.add(btnE);
 		contentPane.add(btnPi);
